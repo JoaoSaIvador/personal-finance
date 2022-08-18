@@ -2,7 +2,7 @@
 	<b-navbar
 		type="light"
 		variant="light"
-		class="todo-navbar d-flex flex-row justify-content-between"
+		class="custom-navbar d-flex flex-row justify-content-between"
 	>
 		<b-navbar-brand>Personal Finance</b-navbar-brand>
 		<b-navbar-nav v-if="isDashboard" class="ml-auto">
@@ -27,7 +27,7 @@
 </script>
 
 <style scoped>
-	.todo-navbar {
+	.custom-navbar {
 		box-shadow: rgba(0, 0, 0, 0.02) 0px 14px 28px,
 			rgba(0, 0, 0, 0.02) 0px 10px 10px;
 		padding-right: 10%;
