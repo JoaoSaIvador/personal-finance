@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const deletedTransaction = await Transaction.deleteOne({ _id: red.params.id });
+        const deletedTransaction = await Transaction.deleteOne({ _id: req.params.id });
         res.json(deletedTransaction);
     } catch (error) {
         res.json({ message: error });

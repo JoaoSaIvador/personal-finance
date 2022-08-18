@@ -9,8 +9,12 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Import Routes
-const transactionsRoute = require('./routes/transactions');
-app.use('/transactions', transactionsRoute);
+const transactionRoutes = require('./routes/transactions');
+const authRoutes = require('./routes/auth');
+
+// Middleware
+app.use('/api/transactions', transactionRoutes);
+app.use('/api/user', authRoutes);
 
 // Routes
 app.get('/', (req, res) => {
