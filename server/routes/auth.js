@@ -12,19 +12,19 @@ router.post('/register', async (req, res) => {
     }
 
     // Encrypt password
-    var encryptedPassword = await bcrypt.hash(req.password, 10);
+    var encryptedPassword = await bcrypt.hash(req.body.password, 10);
 
     // Create new user
     const user = new User({
-        username: req.username,
-        email: req.email.toLowerCase(),
+        username: req.body.username,
+        email: req.body.email.toLowerCase(),
         password: encryptedPassword
     });
 
     // Save user in MongoDB
     try {
-        const savedUser = await newUser.save();
-        res.json(savedTransaction);
+        const savedUser = await user.save();
+        res.json(savedUser);
     } catch (error) {
         res.status(400).json({ message: error });
     }
@@ -32,13 +32,13 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     // Check if user exists with the same email and if given password is correct
-    const user = await User.findOne({ email: req.email });
+    const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
         return res.status(404).json({ message: 'User does not exist!' });
     }
 
-    if (!(await bcrypt.compare(password, user.password))) {
+    if (!(await bcrypt.compare(req.body.password, user.password))) {
         return res.status(400).json({ message: 'Incorrect password!' });
     }
 
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
             expiresIn: "2min"
         }
     );
-    res.header('authorization', 'Bearer ' + token);
+    res.header('Authorization', 'Bearer ' + token);
 
     res.json({ message: 'Logged in!' });
 });

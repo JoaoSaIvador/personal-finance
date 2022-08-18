@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Transaction = require('../models/Transaction');
+const verify = require('./verifyToken');
 
 router.get('/', async (req, res) => {
     try {
