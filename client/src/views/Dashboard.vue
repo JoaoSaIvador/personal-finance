@@ -16,6 +16,7 @@
 </template>
 
 <script>
+	import axios from "axios/dist/axios";
 	import TransactionList from "@/components/TransactionList";
 	import CategoryCard from "@/components/CategoryCard";
 
@@ -46,6 +47,15 @@
 					},
 				],
 			};
+		},
+		created() {
+			// User not authorized
+			const token = localStorage.getItem("token");
+			if (!token) {
+				this.$router.push("/login");
+			} else {
+				// Validate Token
+			}
 		},
 	};
 </script>

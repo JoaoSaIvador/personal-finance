@@ -16,7 +16,10 @@
 	export default {
 		name: "TopBar",
 		methods: {
-			logout() {},
+			logout() {
+				localStorage.clear();
+				this.$router.push("login");
+			},
 		},
 		computed: {
 			isDashboard() {

@@ -21,10 +21,27 @@ router.post('/register', async (req, res) => {
         password: encryptedPassword
     });
 
+    // Create JWT Token
+    const token = jwt.sign(
+        { _id: user._id },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: "2min"
+        }
+    );
+
+    //res.header('Authorization', 'Bearer ' + token);
+    res.cookie('Authorization', token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    });
+
     // Save user in MongoDB
     try {
-        const savedUser = await user.save();
-        res.json(savedUser);
+        let savedUser = await user.save();
+        res.json({
+            message: 'Logged in!'
+        });
     } catch (error) {
         res.status(400).json({ message: error });
     }
@@ -50,9 +67,16 @@ router.post('/login', async (req, res) => {
             expiresIn: "2min"
         }
     );
-    res.header('Authorization', 'Bearer ' + token);
 
-    res.json({ message: 'Logged in!' });
+    //res.header('Authorization', 'Bearer ' + token);
+    res.cookie('Authorization', token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    });
+
+    res.json({
+        message: 'Logged in!'
+    });
 });
 
 module.exports = router;
