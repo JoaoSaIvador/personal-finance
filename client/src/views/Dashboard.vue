@@ -3,7 +3,7 @@
 		class="primary-div container d-flex flex-row flex-wrap justify-content-center align-items-center"
 	>
 		<div class="d-flex flex-column">
-			<TransactionList />
+			<TransactionList :transactions="transactions" />
 		</div>
 		<div class="d-flex flex-column">
 			<CategoryCard
@@ -46,6 +46,7 @@
 						total: "EUR 252,90",
 					},
 				],
+				transactions: [],
 			};
 		},
 		created() {
@@ -83,7 +84,7 @@
 						params: { user: user },
 					})
 					.then((response) => {
-						console.log(response.data.transactions);
+						this.transactions = response.data.transactions;
 					});
 			},
 		},

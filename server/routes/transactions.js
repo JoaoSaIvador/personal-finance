@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
     const date = new Date().toJSON().slice(0, 10);
 
     const transaction = new Transaction({
+        purpose: req.body.purpose,
         value: req.body.value,
         category: req.body.category,
         date: date,

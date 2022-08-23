@@ -40,7 +40,7 @@
 							Login
 						</b-button>
 						<b-button
-							class="ms-2 btn"
+							class="ml-2 btn"
 							variant="outline-dark"
 							@click="$router.push('register')"
 						>

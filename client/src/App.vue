@@ -28,4 +28,20 @@
 		height: calc(100% - 56px);
 		background-color: rgb(238, 238, 238);
 	}
+
+	.table-button {
+		width: 30px;
+		height: 30px;
+		margin: 0 2px 0 2px;
+	}
+
+	.page-link {
+		color: #343a40 !important;
+	}
+
+	.page-item.active .page-link {
+		color: #ffffff !important;
+		background-color: #343a40 !important;
+		border: none !important;
+	}
 </style>
