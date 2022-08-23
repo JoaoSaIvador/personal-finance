@@ -67,10 +67,16 @@
 		methods: {
 			onSubmit() {
 				axios
-					.post("http://localhost:4000/api/user/login", {
-						email: this.user.email,
-						password: this.user.password,
-					})
+					.post(
+						"http://localhost:4000/api/user/login",
+						{
+							email: this.user.email,
+							password: this.user.password,
+						},
+						{
+							withCredentials: true,
+						}
+					)
 					.then((res) => {
 						if (res.status === 200) {
 							localStorage.setItem("token", res.data.token);

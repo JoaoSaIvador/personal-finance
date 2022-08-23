@@ -3,7 +3,7 @@ const router = express.Router();
 const Transaction = require('../models/Transaction');
 const verify = require('./verifyToken');
 
-router.get('/', async (req, res) => {
+router.get('/', verify, async (req, res) => {
     try {
         const transactions = await Transaction.find({ user: req.query.user });
         res.json({ transactions: transactions });

@@ -79,6 +79,7 @@
 				const user = localStorage.getItem("authUser");
 				axios
 					.get(`http://localhost:4000/api/transactions/`, {
+						withCredentials: true,
 						params: { user: user },
 					})
 					.then((response) => {
