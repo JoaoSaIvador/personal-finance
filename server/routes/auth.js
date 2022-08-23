@@ -83,7 +83,7 @@ router.post('/login', async (req, res) => {
 router.post('/verifyUser', async (req, res) => {
     const token = req.body.token;
     if (!token) {
-        return res.status(401).json({ message: 'Access Denied' });
+        return res.json({ message: 'Access Denied' });
     }
 
     try {
@@ -92,7 +92,7 @@ router.post('/verifyUser', async (req, res) => {
 
         res.json({ user: user });
     } catch (error) {
-        res.status(400).json({ message: 'Invalid Token' });
+        res.json({ message: 'Invalid Token' });
     }
 });
 

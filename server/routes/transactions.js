@@ -5,8 +5,8 @@ const verify = require('./verifyToken');
 
 router.get('/', async (req, res) => {
     try {
-        const transactions = await Transaction.find();
-        res.json(transactions);
+        const transactions = await Transaction.find({ user: req.query.user });
+        res.json({ transactions: transactions });
     } catch (error) {
         res.json({ message: error });
     }
@@ -22,9 +22,13 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    const date = new Date().toJSON().slice(0, 10);
+
     const transaction = new Transaction({
         value: req.body.value,
-        category: req.body.category
+        category: req.body.category,
+        date: date,
+        user: req.body.user
     });
 
     try {

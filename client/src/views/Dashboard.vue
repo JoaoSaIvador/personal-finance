@@ -57,21 +57,34 @@
 				// Validate Token
 				axios
 					.post("http://localhost:4000/api/user/verifyUser", {
-						token: localStorage.getItem("token"),
+						token: token,
 					})
 					.then((response) => {
-						console.log(response.data);
 						if (response.data.user) {
 							localStorage.setItem(
 								"authUser",
 								response.data.user.email
 							);
+
+							this.getTransactions();
 						} else {
 							localStorage.clear();
 							this.$router.push("login");
 						}
 					});
 			}
+		},
+		methods: {
+			getTransactions() {
+				const user = localStorage.getItem("authUser");
+				axios
+					.get(`http://localhost:4000/api/transactions/`, {
+						params: { user: user },
+					})
+					.then((response) => {
+						console.log(response.data.transactions);
+					});
+			},
 		},
 	};
 </script>

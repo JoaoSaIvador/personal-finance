@@ -82,17 +82,11 @@
 		methods: {
 			onSubmit() {
 				axios
-					.post(
-						"http://localhost:4000/api/user/register",
-						{
-							username: this.user.username,
-							email: this.user.email,
-							password: this.user.password,
-						},
-						{
-							withCredentials: true,
-						}
-					)
+					.post("http://localhost:4000/api/user/register", {
+						username: this.user.username,
+						email: this.user.email,
+						password: this.user.password,
+					})
 					.then((res) => {
 						if (res.status === 200) {
 							localStorage.setItem("token", res.data.token);
