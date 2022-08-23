@@ -55,6 +55,22 @@
 				this.$router.push("/login");
 			} else {
 				// Validate Token
+				axios
+					.post("http://localhost:4000/api/user/verifyUser", {
+						token: localStorage.getItem("token"),
+					})
+					.then((response) => {
+						console.log(response.data);
+						if (response.data.user) {
+							localStorage.setItem(
+								"authUser",
+								response.data.user.email
+							);
+						} else {
+							localStorage.clear();
+							this.$router.push("login");
+						}
+					});
 			}
 		},
 	};

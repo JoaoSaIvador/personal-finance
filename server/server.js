@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 app.use(cors({ credentials: true, origin: 'http://localhost:8080' }));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Import Routes
 const transactionRoutes = require('./routes/transactions');

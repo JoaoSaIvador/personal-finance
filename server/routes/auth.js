@@ -75,8 +75,25 @@ router.post('/login', async (req, res) => {
     });
 
     res.json({
-        message: 'Logged in!'
+        message: 'Logged in!',
+        token: token
     });
+});
+
+router.post('/verifyUser', async (req, res) => {
+    const token = req.body.token;
+    if (!token) {
+        return res.status(401).json({ message: 'Access Denied' });
+    }
+
+    try {
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(verified._id);
+
+        res.json({ user: user });
+    } catch (error) {
+        res.status(400).json({ message: 'Invalid Token' });
+    }
 });
 
 module.exports = router;
