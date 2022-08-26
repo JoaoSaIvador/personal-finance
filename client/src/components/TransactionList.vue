@@ -56,11 +56,13 @@
 						class="table-button d-flex align-items-center justify-content-center"
 						to="/"
 					>
+						<font-awesome-icon icon="fa-solid fa-pencil" />
 					</b-button>
 					<b-button
 						variant="outline-dark"
 						class="table-button d-flex align-items-center justify-content-center"
 					>
+						<font-awesome-icon icon="fa-solid fa-trash-can" />
 					</b-button>
 				</div>
 			</template>
@@ -106,7 +108,7 @@
 					},
 				],
 				currentPage: 1,
-				perPage: 15,
+				perPage: 13,
 				sortDesc: false,
 				filter: null,
 				affectedLine: null,

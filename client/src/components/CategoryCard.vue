@@ -27,7 +27,7 @@
 	.category-card:hover {
 		box-shadow: rgba(0, 0, 0, 0.3) 0px 14px 28px,
 			rgba(0, 0, 0, 0.3) 0px 10px 10px;
-		background-color: #252727 !important;
+		background-color: #343a40 !important;
 		color: white !important;
 	}
 
