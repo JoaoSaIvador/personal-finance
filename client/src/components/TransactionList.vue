@@ -6,7 +6,9 @@
 			class="w-100 d-flex flex-row justify-content-between align-items-center mb-3"
 		>
 			<div>
-				<b-button variant="dark" to="/"> Create </b-button>
+				<b-button variant="dark" @click="$emit('showModal')">
+					Create
+				</b-button>
 			</div>
 			<div v-if="transactions.length > 0">
 				<b-form-group style="margin: 0">

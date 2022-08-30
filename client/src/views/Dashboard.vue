@@ -3,7 +3,10 @@
 		class="primary-div container d-flex flex-row flex-wrap justify-content-center align-items-center"
 	>
 		<div class="d-flex flex-column">
-			<TransactionList :transactions="transactions" />
+			<TransactionList
+				:transactions="transactions"
+				@showModal="showModal"
+			/>
 		</div>
 		<div class="d-flex flex-column">
 			<CategoryCard
@@ -12,6 +15,11 @@
 				:card="card"
 			/>
 		</div>
+		<TransactionModal
+			v-show="isCreating"
+			@closeModal="isCreating = false"
+			@confirm="confirm"
+		/>
 	</div>
 </template>
 
@@ -19,12 +27,14 @@
 	import axios from "axios/dist/axios";
 	import TransactionList from "@/components/TransactionList";
 	import CategoryCard from "@/components/CategoryCard";
+	import TransactionModal from "@/components/TransactionModal";
 
 	export default {
 		name: "Dashboard",
 		components: {
 			TransactionList,
 			CategoryCard,
+			TransactionModal,
 		},
 		data() {
 			return {
@@ -47,6 +57,7 @@
 					},
 				],
 				transactions: [],
+				isCreating: false,
 			};
 		},
 		created() {
@@ -86,6 +97,14 @@
 					.then((response) => {
 						this.transactions = response.data.transactions;
 					});
+			},
+			confirm(confirmation) {
+				if (confirmation) {
+					//this.$emit("delete", this.affectedLine);
+				}
+			},
+			showModal() {
+				this.isCreating = true;
 			},
 		},
 	};
