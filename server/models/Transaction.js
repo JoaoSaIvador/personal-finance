@@ -6,7 +6,8 @@ const TransactionSchema = new Schema({
   value: Number,
   category: String,
   date: String,
-  user: String
+  user: String,
+  createdAt: String
 });
 
 module.exports = mongoose.model("Transaction", TransactionSchema);;

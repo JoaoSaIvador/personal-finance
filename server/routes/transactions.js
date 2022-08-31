@@ -23,13 +23,15 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const date = new Date().toJSON().slice(0, 10);
+    const timestamp = new Date().toJSON().slice(0, 19);
 
     const transaction = new Transaction({
         purpose: req.body.transaction.purpose,
         value: req.body.transaction.value,
         category: req.body.transaction.category,
         date: date,
-        user: req.body.transaction.user
+        user: req.body.transaction.user,
+        createdAt: timestamp
     });
 
     try {
