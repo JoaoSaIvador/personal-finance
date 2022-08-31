@@ -98,10 +98,17 @@
 						this.transactions = response.data.transactions;
 					});
 			},
-			confirm(confirmation) {
-				if (confirmation) {
-					//this.$emit("delete", this.affectedLine);
-				}
+			confirm(transaction) {
+				transaction.user = localStorage.getItem("authUser");
+
+				axios
+					.post(`http://localhost:4000/api/transactions/`, {
+						transaction: transaction,
+					})
+					.then((response) => {
+						this.transactions.push(response.data.transaction);
+						this.isCreating = false;
+					});
 			},
 			showModal() {
 				this.isCreating = true;

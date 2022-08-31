@@ -25,16 +25,16 @@ router.post('/', async (req, res) => {
     const date = new Date().toJSON().slice(0, 10);
 
     const transaction = new Transaction({
-        purpose: req.body.purpose,
-        value: req.body.value,
-        category: req.body.category,
+        purpose: req.body.transaction.purpose,
+        value: req.body.transaction.value,
+        category: req.body.transaction.category,
         date: date,
-        user: req.body.user
+        user: req.body.transaction.user
     });
 
     try {
         const savedTransaction = await transaction.save();
-        res.json(savedTransaction);
+        res.json({ transaction: savedTransaction });
     } catch (error) {
         res.json({ message: error });
     }

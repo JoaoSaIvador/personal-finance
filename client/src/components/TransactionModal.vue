@@ -5,17 +5,57 @@
 				<font-awesome-icon icon="fa-solid fa-xmark" />
 			</div>
 			<h6>Create Transaction</h6>
+
+			<form>
+				<div
+					class="form-group d-flex flex-column justify-content-center align-items-start"
+				>
+					<label for="formGroupPurpose">Purpose:</label>
+					<input
+						v-model="transaction.purpose"
+						type="text"
+						class="form-control"
+						id="formGroupPurpose"
+						placeholder="Vegetables"
+					/>
+				</div>
+				<div
+					class="form-group d-flex flex-column justify-content-center align-items-start"
+				>
+					<label for="formGroupCategory">Category:</label>
+					<input
+						v-model="transaction.category"
+						type="text"
+						class="form-control"
+						id="formGroupCategory"
+						placeholder="Food & Drinks"
+					/>
+				</div>
+				<div
+					class="form-group d-flex flex-column justify-content-center align-items-start"
+				>
+					<label for="formGroupValue">Value:</label>
+					<input
+						v-model="transaction.value"
+						type="number"
+						class="form-control"
+						id="formGroupValue"
+						placeholder="0.00"
+					/>
+				</div>
+			</form>
+
 			<div
 				class="input-group d-flex flex-row justify-content-center mt-3"
 			>
 				<b-button
-					class="mr-1"
+					class="mr-2"
 					variant="outline-dark"
 					@click="$emit('closeModal')"
 				>
 					Cancel
 				</b-button>
-				<b-button variant="dark" @click="$emit('confirm', true)">
+				<b-button variant="dark" @click="$emit('confirm', transaction)">
 					Confirm
 				</b-button>
 			</div>
@@ -28,7 +68,13 @@
 		name: "TransactionModal",
 		props: {},
 		data() {
-			return {};
+			return {
+				transaction: {
+					purpose: "",
+					category: "",
+					value: null,
+				},
+			};
 		},
 	};
 </script>
@@ -53,7 +99,7 @@
 		text-align: center;
 		align-items: center;
 		background-color: white;
-		height: 20em;
+		height: auto;
 		width: 30em;
 		padding: 20px 20px;
 		border-radius: 20px;
@@ -66,7 +112,7 @@
 	h6 {
 		font-weight: 500;
 		font-size: 28px;
-		margin: 20px 0 0 0;
+		margin: 0 0 1em 0;
 	}
 
 	p {
