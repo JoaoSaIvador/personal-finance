@@ -16,20 +16,26 @@
 						type="text"
 						class="form-control"
 						id="formGroupPurpose"
-						placeholder="Vegetables"
+						placeholder="Laptop"
 					/>
 				</div>
 				<div
 					class="form-group d-flex flex-column justify-content-center align-items-start"
 				>
 					<label for="formGroupCategory">Category:</label>
-					<input
-						v-model="transaction.category"
-						type="text"
+					<select
 						class="form-control"
+						v-model="transaction.category"
 						id="formGroupCategory"
-						placeholder="Food & Drinks"
-					/>
+					>
+						<option
+							v-for="category in categories"
+							:key="category"
+							:value="category"
+						>
+							{{ category }}
+						</option>
+					</select>
 				</div>
 				<div
 					class="form-group d-flex flex-column justify-content-center align-items-start"
@@ -71,9 +77,15 @@
 			return {
 				transaction: {
 					purpose: "",
-					category: "",
+					category: "Shopping",
 					value: null,
 				},
+				categories: [
+					"Shopping",
+					"Food & Drinks",
+					"Bills & Utilities",
+					"Others",
+				],
 			};
 		},
 	};
