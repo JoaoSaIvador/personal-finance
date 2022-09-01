@@ -133,12 +133,13 @@
 		.page-content {
 			width: 50vw;
 			height: 80vh;
+			margin-top: 3em;
 		}
 	}
 
 	@media screen and (min-width: 1201px) {
 		.page-content {
-			width: 700px;
+			width: 670px;
 			height: 750px;
 		}
 	}

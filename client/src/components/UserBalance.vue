@@ -18,7 +18,7 @@
 <style scoped>
 	@media screen and (min-width: 1201px) {
 		.page-content {
-			width: 360px;
+			width: 350px;
 			height: 250px;
 		}
 	}

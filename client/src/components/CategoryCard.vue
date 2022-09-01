@@ -35,7 +35,7 @@
 		.category-card {
 			margin: 3em 1.5em 3em 1.5em;
 			height: 150px;
-			width: 15rem;
+			width: 229px;
 		}
 	}
 
@@ -43,7 +43,7 @@
 		.category-card {
 			height: 120px;
 			width: 190px;
-			margin: 0em 1.5em 2em 1.5em !important;
+			margin: 3em 1.5em 0em 1.5em !important;
 		}
 	}
 

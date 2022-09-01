@@ -2,14 +2,16 @@
 	<div
 		class="primary-div container d-flex flex-column justify-content-center align-items-center"
 	>
-		<div class="d-flex flex-row">
+		<div
+			class="d-flex flex-row flex-wrap justify-content-center align-items-center"
+		>
 			<CategoryCard
 				v-for="card in cards"
 				:key="card.title"
 				:card="card"
 			/>
 		</div>
-		<div class="d-flex w-100 flex-row justify-content-start mb-5">
+		<div class="d-flex w-100 flex-row justify-content-center mb-5 px-3">
 			<div class="d-flex flex-column mr-5">
 				<TransactionList
 					:transactions="transactions"
