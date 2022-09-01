@@ -6,27 +6,28 @@
 			</div>
 			<h6>Update Transaction</h6>
 
-			<form>
-				<div
-					class="form-group d-flex flex-column justify-content-center align-items-start"
+			<b-form class="needs-validation" :disabled="!isFormValid">
+				<b-form-group
+					label="Purpose:"
+					label-for="formGroupPurpose"
+					:invalid-feedback="invalidPurposeFeedback"
+					:state="isPurposeValid"
 				>
-					<label for="formGroupPurpose">Purpose:</label>
-					<input
+					<b-form-input
+						id="formGroupPurpose"
 						v-model="transaction.purpose"
 						type="text"
-						class="form-control"
-						id="formGroupPurpose"
 						placeholder="Laptop"
-					/>
-				</div>
-				<div
-					class="form-group d-flex flex-column justify-content-center align-items-start"
-				>
-					<label for="formGroupCategory">Category:</label>
-					<select
-						class="form-control"
-						v-model="transaction.category"
+						:state="isPurposeValid"
+						required
+					></b-form-input>
+				</b-form-group>
+
+				<b-form-group label="Category:" label-for="formGroupCategory">
+					<b-select
 						id="formGroupCategory"
+						v-model="transaction.category"
+						required
 					>
 						<option
 							v-for="category in categories"
@@ -35,21 +36,24 @@
 						>
 							{{ category }}
 						</option>
-					</select>
-				</div>
-				<div
-					class="form-group d-flex flex-column justify-content-center align-items-start"
+					</b-select>
+				</b-form-group>
+				<b-form-group
+					label="Value:"
+					label-for="formGroupValue"
+					:invalid-feedback="invalidValueFeedback"
+					:state="isValueValid"
 				>
-					<label for="formGroupValue">Value:</label>
-					<input
+					<b-form-input
+						id="formGroupValue"
 						v-model="transaction.value"
 						type="number"
-						class="form-control"
-						id="formGroupValue"
 						placeholder="0.00"
-					/>
-				</div>
-			</form>
+						:state="isValueValid"
+						required
+					></b-form-input>
+				</b-form-group>
+			</b-form>
 
 			<div
 				class="input-group d-flex flex-row justify-content-center mt-3"
@@ -88,6 +92,61 @@
 				],
 			};
 		},
+		computed: {
+			invalidPurposeFeedback() {
+				if (!this.transaction.purpose) {
+					return null;
+				}
+
+				if (this.transaction.purpose == "") {
+					return "You must insert a purpose";
+				}
+
+				return "";
+			},
+
+			isPurposeValid() {
+				if (this.invalidPurposeFeedback === null) {
+					return null;
+				}
+				return this.invalidPurposeFeedback === "";
+			},
+
+			invalidValueFeedback() {
+				if (!this.transaction.value) {
+					return null;
+				}
+
+				if (this.transaction.value == "") {
+					return "You must insert a value";
+				}
+
+				if (this.transaction.value <= 0) {
+					return "The value must be superior to 0";
+				}
+
+				return "";
+			},
+
+			isValueValid() {
+				if (this.invalidValueFeedback === null) {
+					return null;
+				}
+				return this.invalidValueFeedback === "";
+			},
+
+			isFormValid() {
+				if (!this.isPurposeValid) {
+					return false;
+				}
+
+				if (!this.isValueValid) {
+					return false;
+				}
+
+				return true;
+			},
+		},
 	};
 </script>
 
@@ -108,7 +167,6 @@
 	.window {
 		display: flex;
 		flex-direction: column;
-		text-align: center;
 		align-items: center;
 		background-color: white;
 		height: auto;

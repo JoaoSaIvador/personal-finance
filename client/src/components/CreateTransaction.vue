@@ -4,59 +4,67 @@
 	>
 		<h6>Create Transaction</h6>
 
-		<form>
-			<div
-				class="form-group d-flex flex-column justify-content-center align-items-start"
-			>
-				<label for="formGroupPurpose">Purpose:</label>
-				<input
-					v-model="transaction.purpose"
-					type="text"
-					class="form-control"
-					id="formGroupPurpose"
-					placeholder="Laptop"
-				/>
-			</div>
-			<div
-				class="form-group d-flex flex-column justify-content-center align-items-start"
-			>
-				<label for="formGroupCategory">Category:</label>
-				<select
-					class="form-control"
-					v-model="transaction.category"
-					id="formGroupCategory"
+		<b-form class="needs-validation w-100" :disabled="!isFormValid">
+			<div class="w-100">
+				<b-form-group
+					label="Purpose:"
+					label-for="formGroupPurpose"
+					:invalid-feedback="invalidPurposeFeedback"
+					:state="isPurposeValid"
 				>
-					<option
-						v-for="category in categories"
-						:key="category"
-						:value="category"
+					<b-form-input
+						id="formGroupPurpose"
+						v-model="transaction.purpose"
+						type="text"
+						placeholder="Laptop"
+						:state="isPurposeValid"
+						required
+					></b-form-input>
+				</b-form-group>
+			</div>
+			<div class="w-100">
+				<b-form-group label="Category:" label-for="formGroupCategory">
+					<b-select
+						id="formGroupCategory"
+						v-model="transaction.category"
+						required
 					>
-						{{ category }}
-					</option>
-				</select>
+						<option
+							v-for="category in categories"
+							:key="category"
+							:value="category"
+						>
+							{{ category }}
+						</option>
+					</b-select>
+				</b-form-group>
 			</div>
-			<div
-				class="form-group d-flex flex-column justify-content-center align-items-start"
-			>
-				<label for="formGroupValue">Value:</label>
-				<input
-					v-model="transaction.value"
-					type="number"
-					class="form-control"
-					id="formGroupValue"
-					placeholder="0.00"
-				/>
+			<div class="w-100">
+				<b-form-group
+					label="Value:"
+					label-for="formGroupValue"
+					:invalid-feedback="invalidValueFeedback"
+					:state="isValueValid"
+				>
+					<b-form-input
+						id="formGroupValue"
+						v-model="transaction.value"
+						type="number"
+						placeholder="0.00"
+						:state="isValueValid"
+						required
+					></b-form-input>
+				</b-form-group>
 			</div>
-		</form>
+		</b-form>
 
-		<div class="input-group d-flex flex-row justify-content-center mt-3">
-			<b-button
-				variant="dark"
-				@click="$emit('createTransaction', transaction)"
-			>
-				Confirm
-			</b-button>
-		</div>
+		<b-button
+			variant="dark"
+			:disabled="!isFormValid"
+			@click="$emit('createTransaction', transaction)"
+		>
+			Confirm
+		</b-button>
 	</div>
 </template>
 
@@ -67,7 +75,7 @@
 		data() {
 			return {
 				transaction: {
-					purpose: "",
+					purpose: null,
 					category: "Shopping",
 					value: null,
 				},
@@ -78,6 +86,61 @@
 					"Others",
 				],
 			};
+		},
+		computed: {
+			invalidPurposeFeedback() {
+				if (!this.transaction.purpose) {
+					return null;
+				}
+
+				if (this.transaction.purpose == "") {
+					return "You must insert a purpose";
+				}
+
+				return "";
+			},
+
+			isPurposeValid() {
+				if (this.invalidPurposeFeedback === null) {
+					return null;
+				}
+				return this.invalidPurposeFeedback === "";
+			},
+
+			invalidValueFeedback() {
+				if (!this.transaction.value) {
+					return null;
+				}
+
+				if (this.transaction.value == "") {
+					return "You must insert a value";
+				}
+
+				if (this.transaction.value <= 0) {
+					return "The value must be superior to 0";
+				}
+
+				return "";
+			},
+
+			isValueValid() {
+				if (this.invalidValueFeedback === null) {
+					return null;
+				}
+				return this.invalidValueFeedback === "";
+			},
+
+			isFormValid() {
+				if (!this.isPurposeValid) {
+					return false;
+				}
+
+				if (!this.isValueValid) {
+					return false;
+				}
+
+				return true;
+			},
 		},
 		methods: {},
 	};
@@ -94,6 +157,5 @@
 	h6 {
 		font-weight: 500;
 		font-size: 26px;
-		margin: 0 0 1em 0;
 	}
 </style>
