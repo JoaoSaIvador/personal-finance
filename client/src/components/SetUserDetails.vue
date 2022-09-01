@@ -2,7 +2,7 @@
 	<b-form
 		class="needs-validation w-100 px-5"
 		:disabled="!isFormValid"
-		@submit.prevent="this.$emit('onSubmit')"
+		@submit.prevent="$emit('onSubmit', user)"
 	>
 		<div v-if="type === 'register'">
 			<b-form-group
@@ -56,12 +56,41 @@
 					:state="isPasswordValid"
 				></b-input>
 			</b-form-group>
+
+			<div
+				v-if="type === 'login'"
+				class="d-flex flex-row justify-content-center mt-5"
+			>
+				<b-button variant="dark" type="submit"> Login </b-button>
+				<b-button
+					class="ml-2 btn"
+					variant="outline-dark"
+					@click="$router.push('register')"
+				>
+					Register
+				</b-button>
+			</div>
+
+			<div
+				v-if="type === 'register'"
+				class="d-flex flex-row justify-content-center mt-5"
+			>
+				<b-button variant="dark" type="submit"> Register </b-button>
+				<b-button
+					class="ml-2 btn"
+					variant="outline-dark"
+					@click="$router.push('login')"
+				>
+					Login
+				</b-button>
+			</div>
 		</div>
 	</b-form>
 </template>
 
 <script>
 	export default {
+		name: "SetUserDetails",
 		props: {
 			type: String,
 		},
@@ -156,6 +185,11 @@
 				}
 
 				return true;
+			},
+		},
+		methods: {
+			onReset() {
+				this.user = null;
 			},
 		},
 	};

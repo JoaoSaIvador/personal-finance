@@ -7,17 +7,6 @@
 				<h2 class="mb-5">Sign in</h2>
 
 				<SetUserDetails @onSubmit="onSubmit" type="login" />
-
-				<div class="d-flex flex-row justify-content-center mt-5">
-					<b-button variant="dark" type="submit"> Login </b-button>
-					<b-button
-						class="ml-2 btn"
-						variant="outline-dark"
-						@click="$router.push('register')"
-					>
-						Register
-					</b-button>
-				</div>
 			</b-container>
 		</b-container>
 	</div>
@@ -31,21 +20,16 @@
 			SetUserDetails,
 		},
 		data() {
-			return {
-				user: {
-					email: null,
-					password: null,
-				},
-			};
+			return {};
 		},
 		methods: {
-			onSubmit() {
+			onSubmit(user) {
 				axios
 					.post(
 						"http://localhost:4000/api/user/login",
 						{
-							email: this.user.email,
-							password: this.user.password,
+							email: user.email,
+							password: user.password,
 						},
 						{
 							withCredentials: true,
@@ -57,9 +41,6 @@
 							this.$router.push("/");
 						}
 					});
-			},
-			onReset() {
-				this.user = null;
 			},
 		},
 	};
