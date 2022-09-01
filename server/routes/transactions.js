@@ -42,6 +42,21 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        const newTransaction = req.body.transaction;
+
+        const updatedTransaction = await Transaction.updateOne(
+            { _id: req.params.id, user: newTransaction.user },
+            { $set: { purpose: newTransaction.purpose, category: newTransaction.category, value: newTransaction.value } }
+        );
+
+        res.json(updatedTransaction);
+    } catch (error) {
+        res.json({ message: error });
+    }
+});
+
 router.delete('/:id', async (req, res) => {
     try {
         const deletedTransaction = await Transaction.deleteOne({ _id: req.params.id });

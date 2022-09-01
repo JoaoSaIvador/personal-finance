@@ -1,6 +1,7 @@
 <template>
 	<div
-		class="primary-div container d-flex flex-column justify-content-center align-items-center"
+		class="container d-flex flex-column justify-content-center align-items-center"
+		style="background-color: rgb(238, 238, 238)"
 	>
 		<div
 			class="d-flex flex-row flex-wrap justify-content-center align-items-center"
@@ -16,6 +17,7 @@
 				<TransactionList
 					:transactions="transactions"
 					@showModal="showModal"
+					@removeTransaction="removeTransaction"
 				/>
 			</div>
 			<div class="d-flex flex-column">
@@ -25,6 +27,7 @@
 		</div>
 		<TransactionModal
 			v-show="isCreating"
+			:transaction="transaction"
 			@closeModal="isCreating = false"
 			@confirm="confirm"
 		/>
@@ -70,6 +73,11 @@
 				],
 				transactions: [],
 				isCreating: false,
+				transaction: {
+					purpose: "",
+					category: "",
+					value: null,
+				},
 			};
 		},
 		created() {
@@ -114,16 +122,28 @@
 				transaction.user = localStorage.getItem("authUser");
 
 				axios
-					.post(`http://localhost:4000/api/transactions/`, {
-						transaction: transaction,
-					})
+					.put(
+						`http://localhost:4000/api/transactions/${transaction._id}`,
+						{
+							transaction: transaction,
+						}
+					)
 					.then((response) => {
-						this.transactions.push(response.data.transaction);
 						this.isCreating = false;
 					});
 			},
-			showModal() {
+			showModal(transaction) {
+				this.transaction = transaction;
 				this.isCreating = true;
+			},
+			removeTransaction(id, deletedCount) {
+				if (deletedCount === 1) {
+					this.transactions.splice(
+						this.transactions.findIndex(
+							(transaction) => transaction._id === id
+						)
+					);
+				}
 			},
 		},
 	};

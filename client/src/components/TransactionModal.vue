@@ -4,7 +4,7 @@
 			<div class="close" @click="$emit('closeModal')">
 				<font-awesome-icon icon="fa-solid fa-xmark" />
 			</div>
-			<h6>Create Transaction</h6>
+			<h6>Update Transaction</h6>
 
 			<form>
 				<div
@@ -72,14 +72,11 @@
 <script>
 	export default {
 		name: "TransactionModal",
-		props: {},
+		props: {
+			transaction: Object,
+		},
 		data() {
 			return {
-				transaction: {
-					purpose: "",
-					category: "Shopping",
-					value: null,
-				},
 				categories: [
 					"Shopping",
 					"Food & Drinks",

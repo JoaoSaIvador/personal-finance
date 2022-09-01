@@ -6,16 +6,11 @@
 			class="bg-light w-100 d-flex flex-column justify-content-start align-items-center"
 		>
 			<div
-				class="w-100 d-flex flex-row justify-content-between align-items-center mb-3"
+				class="w-100 d-flex flex-row justify-content-start align-items-center mb-3"
 			>
-				<div>
-					<b-button variant="dark" @click="$emit('showModal')">
-						Create
-					</b-button>
-				</div>
 				<div v-if="transactions.length > 0">
 					<b-form-group style="margin: 0">
-						<b-input-group size="md">
+						<b-input-group size="sm">
 							<b-form-input
 								id="filter-input"
 								v-model="filter"
@@ -61,13 +56,14 @@
 						<b-button
 							variant="outline-dark"
 							class="table-button d-flex align-items-center justify-content-center"
-							to="/"
+							@click="$emit('showModal', row.item)"
 						>
 							<font-awesome-icon icon="fa-solid fa-pencil" />
 						</b-button>
 						<b-button
 							variant="outline-dark"
 							class="table-button d-flex align-items-center justify-content-center"
+							@click="deleteTransaction(row.item)"
 						>
 							<font-awesome-icon icon="fa-solid fa-trash-can" />
 						</b-button>
@@ -86,6 +82,8 @@
 </template>
 
 <script>
+	import axios from "axios/dist/axios";
+
 	export default {
 		name: "TransactionList",
 		props: {
@@ -124,7 +122,22 @@
 				sortBy: "createdAt",
 			};
 		},
-		methods: {},
+		methods: {
+			deleteTransaction(transaction) {
+				axios
+					.delete(
+						`http://localhost:4000/api/transactions/${transaction._id}`
+					)
+					.then((response) => {
+						//console.log(response.data.deletedCount);
+						this.$emit(
+							"removeTransaction",
+							transaction._id,
+							response.data.deletedCount
+						);
+					});
+			},
+		},
 	};
 </script>
 

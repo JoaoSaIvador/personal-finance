@@ -22,6 +22,7 @@ library.add(faXmark)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 axios.defaults.withCredentials = true;
+Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
 

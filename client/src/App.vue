@@ -25,6 +25,8 @@
 	}
 
 	.primary-div {
+		width: 100%;
+		height: calc(100% - 56px);
 		background-color: rgb(238, 238, 238);
 	}
 
