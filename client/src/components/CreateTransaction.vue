@@ -61,7 +61,7 @@
 		<b-button
 			variant="dark"
 			:disabled="!isFormValid"
-			@click="$emit('createTransaction', transaction)"
+			@click="createTransaction"
 		>
 			Confirm
 		</b-button>
@@ -142,7 +142,14 @@
 				return true;
 			},
 		},
-		methods: {},
+		methods: {
+			createTransaction() {
+				this.$emit("createTransaction", this.transaction);
+				this.transaction.purpose = null;
+				this.transaction.category = "Shopping";
+				this.transaction.value = null;
+			},
+		},
 	};
 </script>
 

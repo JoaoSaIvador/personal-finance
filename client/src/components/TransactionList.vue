@@ -34,7 +34,7 @@
 
 			<b-table
 				v-if="transactions.length > 0"
-				hover
+				class="scroll"
 				borderless
 				sort-icon-left
 				label-sort-asc=""
@@ -42,8 +42,8 @@
 				label-sort-clear=""
 				small
 				responsive
-				:current-page="currentPage"
-				:per-page="perPage"
+				sticky-header
+				head-variant="light"
 				:filter="filter"
 				:sort-by.sync="sortBy"
 				:sort-desc.sync="sortDesc"
@@ -53,31 +53,22 @@
 			>
 				<template v-slot:cell(actions)="row">
 					<div class="d-flex flex-row justify-content-center">
-						<b-button
-							variant="outline-dark"
-							class="table-button d-flex align-items-center justify-content-center"
+						<a
 							@click="$emit('showModal', row.item)"
+							class="actionButton d-flex align-items-center justify-content-center mr-2"
 						>
 							<font-awesome-icon icon="fa-solid fa-pencil" />
-						</b-button>
-						<b-button
-							variant="outline-dark"
-							class="table-button d-flex align-items-center justify-content-center"
+						</a>
+						<a
 							@click="deleteTransaction(row.item)"
+							class="actionButton d-flex align-items-center justify-content-center"
 						>
 							<font-awesome-icon icon="fa-solid fa-trash-can" />
-						</b-button>
+						</a>
 					</div>
 				</template>
 			</b-table>
 		</div>
-		<b-pagination
-			v-if="transactions.length > 0"
-			v-model="currentPage"
-			:total-rows="transactions.length"
-			:per-page="perPage"
-			class="m-0"
-		/>
 	</div>
 </template>
 
@@ -95,22 +86,27 @@
 					{
 						key: "purpose",
 						sortable: true,
+						thClass: "bg-light",
 					},
 					{
 						key: "category",
 						sortable: true,
+						thClass: "bg-light",
 					},
 					{
 						key: "value",
 						sortable: true,
+						thClass: "bg-light",
 					},
 					{
 						key: "date",
 						sortable: true,
+						thClass: "bg-light",
 					},
 					{
 						key: "actions",
 						sortable: false,
+						thClass: "bg-light",
 					},
 				],
 				currentPage: 1,
@@ -129,7 +125,6 @@
 						`http://localhost:4000/api/transactions/${transaction._id}`
 					)
 					.then((response) => {
-						//console.log(response.data.deletedCount);
 						this.$emit(
 							"removeTransaction",
 							transaction._id,
@@ -162,5 +157,38 @@
 			width: 80vw;
 			height: 60vh;
 		}
+	}
+
+	.actionButton {
+		width: 28px;
+		height: 28px;
+		color: #343a40;
+	}
+
+	.actionButton:hover {
+		background-color: #343a40;
+		border-radius: 50%;
+		color: white;
+	}
+
+	.scroll {
+		max-height: 608px;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	.scroll::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 16px 16px transparent;
+		border: solid 6px transparent;
+	}
+
+	.scroll::-webkit-scrollbar {
+		width: 16px;
+	}
+
+	.scroll::-webkit-scrollbar-thumb {
+		box-shadow: inset 0 0 16px 16px #252727;
+		border: solid 6px transparent;
+		border-radius: 16px;
 	}
 </style>
