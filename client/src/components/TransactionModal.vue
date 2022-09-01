@@ -61,7 +61,10 @@
 				>
 					Cancel
 				</b-button>
-				<b-button variant="dark" @click="$emit('confirm', transaction)">
+				<b-button
+					variant="dark"
+					@click="$emit('updateTransaction', transaction)"
+				>
 					Confirm
 				</b-button>
 			</div>
@@ -122,10 +125,5 @@
 		font-weight: 500;
 		font-size: 28px;
 		margin: 0 0 1em 0;
-	}
-
-	p {
-		font-size: 16px;
-		margin: 30px 0 10px 0;
 	}
 </style>

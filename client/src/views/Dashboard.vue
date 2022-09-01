@@ -22,14 +22,14 @@
 			</div>
 			<div class="d-flex flex-column">
 				<UserBalance />
-				<CreateTransaction />
+				<CreateTransaction @createTransaction="createTransaction" />
 			</div>
 		</div>
 		<TransactionModal
 			v-show="isCreating"
 			:transaction="transaction"
 			@closeModal="isCreating = false"
-			@confirm="confirm"
+			@updateTransaction="updateTransaction"
 		/>
 	</div>
 </template>
@@ -118,7 +118,18 @@
 						this.transactions = response.data.transactions;
 					});
 			},
-			confirm(transaction) {
+			createTransaction(transaction) {
+				transaction.user = localStorage.getItem("authUser");
+
+				axios
+					.post(`http://localhost:4000/api/transactions`, {
+						transaction: transaction,
+					})
+					.then((response) => {
+						this.transactions.push(response.data.transaction);
+					});
+			},
+			updateTransaction(transaction) {
 				transaction.user = localStorage.getItem("authUser");
 
 				axios
