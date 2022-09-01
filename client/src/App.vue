@@ -25,8 +25,14 @@
 	}
 
 	.primary-div {
-		height: calc(100% - 56px);
 		background-color: rgb(238, 238, 238);
+	}
+
+	.page-content {
+		padding: 2.5em;
+		border-radius: 20px;
+		box-shadow: rgba(0, 0, 0, 0.05) 0px 14px 28px,
+			rgba(0, 0, 0, 0.05) 0px 10px 10px;
 	}
 
 	.table-button {

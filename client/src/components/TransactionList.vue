@@ -129,13 +129,6 @@
 </script>
 
 <style scoped>
-	.page-content {
-		padding: 2.5em;
-		border-radius: 20px;
-		box-shadow: rgba(0, 0, 0, 0.05) 0px 14px 28px,
-			rgba(0, 0, 0, 0.05) 0px 10px 10px;
-	}
-
 	@media screen and (max-width: 1200px) and (min-width: 501px) {
 		.page-content {
 			width: 50vw;

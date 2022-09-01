@@ -33,7 +33,7 @@
 
 	@media screen and (min-width: 1201px) {
 		.category-card {
-			margin: 1.5em auto 1.5em 3em;
+			margin: 3em 1.5em 3em 1.5em;
 			height: 150px;
 			width: 15rem;
 		}
@@ -43,7 +43,7 @@
 		.category-card {
 			height: 120px;
 			width: 190px;
-			margin: 0em 1em 2em 2em !important;
+			margin: 0em 1.5em 2em 1.5em !important;
 		}
 	}
 
