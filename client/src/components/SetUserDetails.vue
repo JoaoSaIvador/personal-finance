@@ -61,28 +61,28 @@
 				v-if="type === 'login'"
 				class="d-flex flex-row justify-content-center mt-5"
 			>
-				<b-button variant="dark" type="submit"> Login </b-button>
 				<b-button
-					class="ml-2 btn"
+					class="mr-2 btn"
 					variant="outline-dark"
 					@click="$router.push('register')"
 				>
 					Register
 				</b-button>
+				<b-button variant="dark" type="submit"> Login </b-button>
 			</div>
 
 			<div
 				v-if="type === 'register'"
 				class="d-flex flex-row justify-content-center mt-5"
 			>
-				<b-button variant="dark" type="submit"> Register </b-button>
 				<b-button
-					class="ml-2 btn"
+					class="mr-2 btn"
 					variant="outline-dark"
 					@click="$router.push('login')"
 				>
 					Login
 				</b-button>
+				<b-button variant="dark" type="submit"> Register </b-button>
 			</div>
 		</div>
 	</b-form>

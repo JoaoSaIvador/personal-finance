@@ -34,7 +34,7 @@
 
 			<b-table
 				v-if="transactions.length > 0"
-				class="scroll"
+				class="scroll text-center"
 				borderless
 				sort-icon-left
 				label-sort-asc=""
@@ -187,7 +187,7 @@
 	}
 
 	.scroll::-webkit-scrollbar-thumb {
-		box-shadow: inset 0 0 16px 16px #252727;
+		box-shadow: inset 0 0 16px 16px #343a40;
 		border: solid 6px transparent;
 		border-radius: 16px;
 	}

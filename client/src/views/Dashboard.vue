@@ -83,6 +83,7 @@
 		created() {
 			// User not authorized
 			const token = localStorage.getItem("token");
+			console.log(token);
 			if (!token) {
 				this.$router.push("/login");
 			} else {

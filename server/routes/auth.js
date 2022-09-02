@@ -40,10 +40,11 @@ router.post('/register', async (req, res) => {
     try {
         let savedUser = await user.save();
         res.json({
-            message: 'Logged in!'
+            message: 'Registered!',
+            token: token
         });
     } catch (error) {
-        res.status(400).json({ message: error });
+        res.status(400).json({ message: 'Email is already in use!' });
     }
 });
 
